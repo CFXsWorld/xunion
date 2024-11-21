@@ -3,7 +3,7 @@ import { formatNumber } from '@/hooks/useErc20Balance';
 import useXWriteContract from '@/hooks/useXWriteContract';
 import { getPairTokens } from '@/services/explore';
 import { useMutation } from '@tanstack/react-query';
-import { formatUnits } from 'ethers';
+import { formatUnits, parseUnits } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Address } from 'viem';
@@ -15,7 +15,6 @@ const useRemoveLP = () => {
 
   const { address: userAddress } = useAccount();
   const [removePercent, setRemoveAmount] = useState('');
-
   const { data, mutate, isPending } = useMutation({
     mutationFn: getPairTokens,
   });
@@ -155,6 +154,7 @@ const useRemoveLP = () => {
   }, [removePercent, userLpAmount]);
 
   const loading = isLoading || isPending || isUserLoading || isUser2Loading;
+
   const remove = async () => {
     if (pairAddress && removePercent && userLpAmount) {
       const { address, abi } = XUNION_SWAP_CONTRACT.interface;
@@ -165,7 +165,12 @@ const useRemoveLP = () => {
         address: address as Address,
         abi,
         functionName: 'xLpRedeem2',
-        args: [pairAddress as Address, String(removeAmount * 10 ** 18)],
+        args: [
+          pairAddress as Address,
+          Number(removePercent) >= 100
+            ? (userLpAmount as bigint)
+            : parseUnits(String(removeAmount)),
+        ],
       });
     }
   };

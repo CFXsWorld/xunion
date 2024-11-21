@@ -63,7 +63,7 @@ const MarketInfo = ({
         <span className="text-[16px] text-tc-secondary">
           {t('x-lending.net.apy')}
         </span>
-        <span className="text-[20px] font-bold">{`${Number(netApy.toString()) / 10000}%`}</span>
+        <span className="text-[20px] font-bold">{`${Number(netApy.toString()) / 100}%`}</span>
       </div>
       <div className="flex flex-1 justify-between">
         <div className="flex h-[84px] min-w-[200px] flex-col gap-[10px]  py-[12px] pr-[16px] max-md:min-w-[160px] max-md:flex-1">

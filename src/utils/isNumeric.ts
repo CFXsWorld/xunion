@@ -1,4 +1,4 @@
 import { isNumber } from 'lodash';
 
 export const isNumeric = (value: string) =>
-  isNumber(Number(value)) && Number(value) > 0;
+  value !== 'NaN' && isNumber(Number(value)) && Number(value) > 0;

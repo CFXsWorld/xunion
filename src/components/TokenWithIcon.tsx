@@ -11,7 +11,7 @@ const TokenWithIcon = ({
 }) => {
   return (
     <div className={cn('flex items-center gap-[5px]', className)}>
-      <TokenIcon src={token.icon} name={token?.symbol || 'X'} />
+      <TokenIcon src={token?.icon} name={token?.symbol || 'X'} />
       <span>{token?.symbol}</span>
     </div>
   );

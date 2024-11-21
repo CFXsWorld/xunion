@@ -1,4 +1,4 @@
-import useMulticall, { ContractCall } from '@/hooks/useMulticall.ts';
+import useTryMulticall, { ContractCall } from '@/hooks/useTryMulticall';
 import { SwapRoute } from '@/types/swap.ts';
 import { XUNION_SWAP_CONTRACT } from '@/contracts';
 import useNativeToken from '@/hooks/useNativeToken.ts';
@@ -6,7 +6,7 @@ import { findIndex, maxBy, minBy } from 'lodash';
 import { formatUnits } from 'ethers';
 
 const useBestRoute = () => {
-  const { multiCall } = useMulticall();
+  const { multiCall } = useTryMulticall();
   const { address: interfaceAddress, abi } = XUNION_SWAP_CONTRACT.interface;
   const { getRealAddress } = useNativeToken();
 
@@ -43,15 +43,16 @@ const useBestRoute = () => {
       };
     });
     return multiCall(calls).then(async (allAmounts) => {
-      const parsedAmountsInfo = (allAmounts.returnData as string[]).map(
-        decodeData
+      const parsedAmountsInfo = allAmounts.map((amt: any) =>
+        decodeData(amt.returnData)
       );
+
       const minAmount = minBy(parsedAmountsInfo, (amount) =>
         Number(amount[0])
       ) as string[];
       const minIndex = findIndex(
         parsedAmountsInfo,
-        (amount) => amount[0] === minAmount?.[0]
+        (amount: string[]) => amount[0] === minAmount?.[0]
       );
       const route = routes[minIndex];
       return {
@@ -81,15 +82,15 @@ const useBestRoute = () => {
       };
     });
     return multiCall(calls).then(async (allAmounts) => {
-      const parsedAmountsInfo = (allAmounts.returnData as string[]).map(
-        decodeData
+      const parsedAmountsInfo = allAmounts.map((amt: any) =>
+        decodeData(amt.returnData)
       );
       const maxAmount = maxBy(parsedAmountsInfo, (amount) =>
         Number(amount[0])
       ) as string[];
       const maxIndex = findIndex(
         parsedAmountsInfo,
-        (amount) => amount[0] === maxAmount?.[0]
+        (amount: string[]) => amount[0] === maxAmount?.[0]
       );
       const route = routes[maxIndex];
       return {

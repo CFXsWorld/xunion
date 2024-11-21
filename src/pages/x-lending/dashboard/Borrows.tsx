@@ -58,7 +58,7 @@ const Borrows = ({
       render: (_: string, record: LendingAsset) => {
         return (
           <div className="flex flex-col gap-[5px]">
-            <span>{` ≈ ${record.lendingInterest}%`}</span>
+            <span>{` ≈ -${record.lendingInterest}%`}</span>
           </div>
         );
       },

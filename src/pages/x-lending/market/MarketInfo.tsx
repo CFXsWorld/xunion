@@ -19,7 +19,7 @@ const MarketInfo = ({
           {t('x-lending.market.size')}
         </span>
         <span className="text-[20px] font-bold">
-          {formatCurrency(formatNumber(totalMarketSize, 6), true)}
+          {formatCurrency(formatNumber(totalMarketSize, 6), true, 0)}
         </span>
       </div>
 
@@ -28,7 +28,7 @@ const MarketInfo = ({
           {t('x-lending.market.available')}
         </span>
         <span className="text-[20px] font-bold">
-          {formatCurrency(formatNumber(totalDepositSize, 6), true)}
+          {formatCurrency(formatNumber(totalDepositSize, 6), true, 0)}
         </span>
       </div>
       <div className="flex h-[84px] min-w-[200px] flex-col gap-[10px]  py-[12px] pr-[16px]  ">
@@ -36,7 +36,7 @@ const MarketInfo = ({
           {t('x-lending.market.borrow')}
         </span>
         <span className="text-[20px] font-bold">
-          {formatCurrency(formatNumber(totalLendingSize, 6), true)}
+          {formatCurrency(formatNumber(totalLendingSize, 6), true, 0)}
         </span>
       </div>
     </div>

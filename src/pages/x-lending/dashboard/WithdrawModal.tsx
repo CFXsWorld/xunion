@@ -145,13 +145,33 @@ const WithdrawModal = ({
                 <HealthFactor value={`${userHealthFactor}`} />
                 <span className="text-[12px] text-tc-secondary">{`->`}</span>
                 <HealthFactor
-                  value={`${estimatedHealthFactor || userHealthFactor}`}
+                  value={`${estimatedHealthFactor?.healthFactor || userHealthFactor}`}
                 />
               </div>
               <div className="text-[12px] text-tc-secondary">
                 <span>{`${t('x-lending.borrow.mode.high.health')} < 1.0`}</span>
               </div>
             </div>
+          </div>
+          <div className="flex-center-between">
+            <span className="text-tc-secondary">
+              {t('x-lending.market.supply.apy')}
+            </span>
+            <span>
+              {asset?.depositInterest}%
+              <span className="px-[10px] text-[12px] text-tc-secondary">{`->`}</span>{' '}
+              {estimatedHealthFactor?.supplyInterest || '--'}
+            </span>
+          </div>
+          <div className="flex-center-between">
+            <span className="text-tc-secondary">
+              {t('x-lending.market.borrow.apy')}
+            </span>
+            <span>
+              {asset?.lendingInterest}%
+              <span className="px-[10px] text-[12px] text-tc-secondary">{`->`}</span>
+              {estimatedHealthFactor?.borrowInterest || '--'}
+            </span>
           </div>
         </div>
         <div>

@@ -16,6 +16,7 @@ import Info from '@/components/Info';
 import { Address } from 'viem';
 import useNativeToken from '@/hooks/useNativeToken';
 import useApprove from '../hooks/useApprove';
+import { useCommonStore } from '@/store/common';
 
 function CreatePool() {
   const {
@@ -36,7 +37,7 @@ function CreatePool() {
   } = useListing();
 
   const { t } = useTranslate();
-
+  const listingLimit = useCommonStore((state) => state.swapLimit?.[0] || 200);
   const {
     isApproved: isTokenAApproved,
     loading: isTokenAApproving,
@@ -102,7 +103,7 @@ function CreatePool() {
             editable
             title={t('x-dex.liquidity.input.tokenB')}
             token={tokenB}
-            placeholder="1000"
+            placeholder={`${listingLimit}`}
             amount={tokenBAmount}
             onAmountChange={setTokenBAmount}
             ownerAmount={tokenBOwnerAmount}

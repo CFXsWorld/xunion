@@ -58,7 +58,9 @@ const WalletDetailModal = () => {
           </div>
 
           <div className="mt-[20px] flex flex-col gap-[16px]">
-            <div className="py-[10px] text-[24px] font-bold">{totalPrice}</div>
+            <div className="line-clamp-1 py-[10px] text-[24px] font-bold">
+              {totalPrice}
+            </div>
             {/*<div>*/}
             {/*  <span>Tokens</span>*/}
             {/*  <span>Activity</span>*/}

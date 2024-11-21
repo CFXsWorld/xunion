@@ -10,17 +10,22 @@ const useXWriteContract = ({
   onSubmitted,
   onWriteSuccess,
   onError,
+  forceReload = true,
+  onSoftWriteSuccess,
 }: {
   showSubmittedModal?: boolean;
   globalNotice?: boolean;
   pendingPool?: boolean;
   onSubmitted?: (hash: string) => void;
   onWriteSuccess?: (e: any) => void;
+  onSoftWriteSuccess?: (e: any) => void;
   onError?: (e: WriteContractErrorType) => void;
+  forceReload?: boolean;
 }) => {
   const { writeTxErrorNotification, writeTxNotification } = usePendingNotice();
   const updateSubmitted = useTxStore((state) => state.updateSubmitted);
   const [loading, setLoading] = useState(false);
+  const [_, refresh] = useState(0);
   const {
     data: hash,
     isPending: isSubmittedLoading,
@@ -48,6 +53,7 @@ const useXWriteContract = ({
       onError?.(submittedError as WriteContractErrorType);
       const reasonMatch = submittedError?.message.match(/reason: (.*)/);
       writeTxErrorNotification(hash, reasonMatch?.[1]);
+      updateSubmitted(null);
     }
   }, [submittedError, isError]);
 
@@ -66,15 +72,19 @@ const useXWriteContract = ({
       // pendingPool
       // TODO collect 2 pools
       writeTxNotification(hash);
-      onWriteSuccess?.(writeEvent);
+      if (!forceReload) {
+        onWriteSuccess?.(writeEvent);
+      }
+      onSoftWriteSuccess?.(writeEvent);
     }
   }, [isSuccess, hash, globalNotice]);
 
   useEffect(() => {
     if (isSubmitted && showSubmittedModal) {
       setLoading(true);
-      updateSubmitted({ hash });
+      updateSubmitted({ hash, forceReload, title: 'Approve' });
       onSubmitted?.(hash);
+      refresh(Math.random());
     }
   }, [isSubmitted, showSubmittedModal]);
 

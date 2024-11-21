@@ -770,6 +770,24 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "minLpAndListLimit",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "mintListLimit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "minLpLimit",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",

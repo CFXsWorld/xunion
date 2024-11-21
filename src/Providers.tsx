@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useRoutes, HashRouter } from 'react-router-dom';
 import {
   confluxESpace,
@@ -23,6 +23,8 @@ import SubmittedModal from '@/components/modals/SubmittedModal.tsx';
 import { antdTableTokens } from '@/styles/reset.ts';
 import TXPendingProvider from '@/components/PendingProvider.tsx';
 import { CHAINS } from '@/contracts/chains.tsx';
+import useSwapContract from './hooks/useSwapContract';
+import { useCommonStore } from './store/common';
 
 const Routes = () => useRoutes(routes);
 
@@ -66,7 +68,16 @@ const Dapp = ({ children }: PropsWithChildren<{ locale: Locale }>) => {
   const { systemTheme, theme } = useTheme();
   const { address } = useAccount();
 
+  const updateSwapLimit = useCommonStore((state) => state.updateSwapLimit);
+
   const isDark = theme === 'system' ? systemTheme === 'dark' : theme === 'dark';
+  const contract = useSwapContract();
+
+  useEffect(() => {
+    contract.minLpAndListLimit().then((res: bigint[]) => {
+      updateSwapLimit(res.map((n) => Number(String(n))));
+    });
+  }, []);
 
   return (
     <ConfigProvider
@@ -98,6 +109,7 @@ const Dapp = ({ children }: PropsWithChildren<{ locale: Locale }>) => {
           <WalletDetailModal />
           {children}
           <div className="w-full max-md:h-[100px] md:h-[50px]" />
+          {/* <ChainBlockHeight /> */}
         </TXPendingProvider>
       </QueryClientProvider>
     </ConfigProvider>

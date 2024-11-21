@@ -1,6 +1,6 @@
 import { Address, erc20Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
-import { parseUnits } from 'ethers';
+import { formatUnits } from 'ethers';
 import { useMemo, useState } from 'react';
 import { isNumeric } from '@/utils/isNumeric.ts';
 import { Token } from '@/types/swap.ts';
@@ -11,7 +11,7 @@ const useApprove = ({
   token,
   amount,
   spenderAddress,
-  hf = 1.0001,
+  hf = 1.01,
 }: {
   token: Token;
   amount: string;
@@ -52,27 +52,37 @@ const useApprove = ({
     loading: isWriteLoading,
     isSubmittedLoading,
   } = useXWriteContract({
-    onWriteSuccess: refetch,
+    onSoftWriteSuccess: () => {
+      refetch();
+    },
+    forceReload: false,
   });
   const isApproved = useMemo(() => {
     if (isNativeToken(token)) return true;
     if (allowance && isNumeric(amount) && decimals) {
-      const amountIn = parseUnits(amount, decimals);
-      return allowance > amountIn;
+      return (
+        Number(formatUnits(allowance, decimals)) > Number(amount) ||
+        Number(formatUnits(allowance, decimals)) == Number(amount)
+      );
     }
     return false;
   }, [allowance, amount, decimals, token]);
 
   const approve = () => {
     setApproveLoading(true);
+    const amountIn = BigInt(
+      (Math.ceil(
+        (Number(amount) < 0.0001 ? 0.001 : Number(amount) * hf) * 10000
+      ) /
+        10000) *
+        10 ** (decimals || 18)
+    );
+
     writeContractAsync({
       address: token?.address as Address,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [
-        spenderAddress,
-        parseUnits((Number(amount) * hf).toString(), decimals),
-      ],
+      args: [spenderAddress, amountIn],
     }).finally(() => {
       setApproveLoading(false);
     });

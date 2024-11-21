@@ -8,7 +8,7 @@ import useErc20Balance, { formatNumber } from '@/hooks/useErc20Balance.ts';
 import useTokenPrice from '@/hooks/useTokenPrice.ts';
 import { useAccount, useReadContract } from 'wagmi';
 import { formatUnits, parseUnits } from 'ethers';
-import { LendingAsset } from '@/types/Lending.ts';
+import { EstimatedHealthFactor, LendingAsset } from '@/types/Lending.ts';
 import useHealthFactor from '@/pages/x-lending/hooks/useHealthFactor.ts';
 
 const useWithdraw = ({
@@ -20,7 +20,8 @@ const useWithdraw = ({
 }) => {
   const inputToken = asset.token;
   const [payAmount, setPayAmount] = useState<string>('');
-  const [estimatedHealthFactor, setEstimatedHealthFactor] = useState<string>();
+  const [estimatedHealthFactor, setEstimatedHealthFactor] =
+    useState<EstimatedHealthFactor>();
   const { getBalance } = useErc20Balance();
   const [inputOwnerAmount, setInputOwnerAmount] = useState(0);
   const { isNativeToken, getRealAddress } = useNativeToken();

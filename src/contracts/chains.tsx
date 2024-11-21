@@ -5,7 +5,7 @@ type ChainName = 'eSpace' | 'scroll' | 'eSpaceTest' | 'scrollTest';
 
 export const CHAINS: Record<ChainName, ChainType> = {
   eSpace: {
-    chainId: 1030,
+    chainId: 1_030,
     name: 'Conflux eSpace',
     icon: <ESpaceIcon />,
     rpc: ['https://evm.confluxrpc.com'],

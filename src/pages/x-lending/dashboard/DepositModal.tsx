@@ -135,13 +135,35 @@ const DepositModal = ({
                 <HealthFactor value={`${userHealthFactor || 0}`} />
                 <span className="text-[12px] text-tc-secondary">{`->`}</span>
                 <HealthFactor
-                  value={healthFactor || `${userHealthFactor || 0}`}
+                  value={
+                    healthFactor?.healthFactor || `${userHealthFactor || 0}`
+                  }
                 />
               </div>
               <div className="text-[12px] text-tc-secondary">
                 <span>{`${t('x-lending.borrow.mode.high.health')} < 1.0`}</span>
               </div>
             </div>
+          </div>
+          <div className="flex-center-between">
+            <span className="text-tc-secondary">
+              {t('x-lending.market.supply.apy')}
+            </span>
+            <span>
+              {asset?.depositInterest}%
+              <span className="px-[10px] text-[12px] text-tc-secondary">{`->`}</span>{' '}
+              {healthFactor?.supplyInterest || '--'}
+            </span>
+          </div>
+          <div className="flex-center-between">
+            <span className="text-tc-secondary">
+              {t('x-lending.market.borrow.apy')}
+            </span>
+            <span>
+              {asset?.lendingInterest}%
+              <span className="px-[10px] text-[12px] text-tc-secondary">{`->`}</span>
+              {healthFactor?.borrowInterest || '--'}
+            </span>
           </div>
         </div>
         <div className="mt-[20px] h-[56px]  w-full">

@@ -40,7 +40,11 @@ export const getPairActivity = async (params: { address: string }) => {
     .then((res) => res.data?.data);
 };
 
-export const getTokenTradeList = async (params: { address: string }) => {
+export const getTokenTradeList = async (params: {
+  address: string;
+  pageSize: number;
+  pageNum: number;
+}) => {
   return request
     .get<
       ResponseType<ListType<TokenTrade>>

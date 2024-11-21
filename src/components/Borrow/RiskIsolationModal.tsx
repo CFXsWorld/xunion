@@ -67,7 +67,7 @@ const RiskIsolationModal = ({
             <span className="text-tc-secondary">
               {t('x-lending.borrow.mode.high.all')}
             </span>
-            <span>{`${token?.symbol || '--'} > SLC`}</span>
+            <span>{`${token?.symbol || '--'} > xUSD`}</span>
           </div>
           <div className="flex items-start justify-between">
             <span className="text-tc-secondary">

@@ -7,7 +7,7 @@ import { Address, erc20Abi } from 'viem';
 import { useReadContract } from 'wagmi';
 import useTokenPrice from '@/hooks/useTokenPrice.ts';
 import { parseUnits } from 'ethers';
-import { LendingAsset } from '@/types/Lending.ts';
+import { EstimatedHealthFactor, LendingAsset } from '@/types/Lending.ts';
 import useHealthFactor from '@/pages/x-lending/hooks/useHealthFactor.ts';
 import useNativeToken from '@/hooks/useNativeToken.ts';
 
@@ -21,7 +21,7 @@ const useDeposit = ({
   const { getBalance } = useErc20Balance();
   const inputToken = asset.token;
   const [payAmount, setPayAmount] = useState<string>('');
-  const [healthFactor, setHealthFactor] = useState<string>();
+  const [healthFactor, setHealthFactor] = useState<EstimatedHealthFactor>();
   const [inputOwnerAmount, setInputOwnerAmount] = useState(0);
 
   const availableAmount = asset.erc20Balance;

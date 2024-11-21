@@ -64,12 +64,8 @@ function MarketDetail() {
             }}
           >
             <LeftOutlined className="text-[16px]" />
-            <span className="pl-[5px] text-[25px]">
-              {CHAINS.eSpaceTest.icon}
-            </span>
-            <span className="text-[16px] font-[500]">
-              {CHAINS.eSpaceTest.name}
-            </span>
+            <span className="pl-[5px] text-[25px]">{CHAINS.eSpace.icon}</span>
+            <span className="text-[16px] font-[500]">{CHAINS.eSpace.name}</span>
           </div>
           <div className="flex items-center justify-end gap-[10px] max-md:absolute max-md:right-[10px] max-md:top-[0px]">
             <Button

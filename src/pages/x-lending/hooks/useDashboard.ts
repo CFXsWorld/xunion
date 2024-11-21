@@ -1,5 +1,9 @@
 import { useAccount, useReadContract } from 'wagmi';
-import { XUNION_LENDING_CONTRACT, XUNION_SLC_CONTRACT } from '@/contracts';
+import {
+  SLCToken,
+  XUNION_LENDING_CONTRACT,
+  XUNION_SLC_CONTRACT,
+} from '@/contracts';
 import { Address, erc20Abi } from 'viem';
 import { useEffect, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -139,11 +143,16 @@ const useDashboard = () => {
                 const unitPrice = Number(
                   formatUnits(allUnitPrice.returnData[index])
                 );
-                const depositAmount = Number(
-                  formatUnits(depositAmounts[index])
+                const depositAmount = formatNumber(
+                  Number(formatUnits(depositAmounts[index])),
+                  6
                 );
-                const lendingAmount = Number(
-                  formatUnits(lendingAmounts[index])
+                const lendingAmount = formatNumber(
+                  Number(formatUnits(lendingAmounts[index])) < 0.00001 &&
+                    0 < Number(formatUnits(lendingAmounts[index]))
+                    ? 0.000001
+                    : Number(formatUnits(lendingAmounts[index])),
+                  6
                 );
                 const depositTotalPrice = formatNumber(
                   depositAmount * unitPrice,
@@ -181,6 +190,12 @@ const useDashboard = () => {
                     mode !== '1' &&
                     asset.lending_mode_num === mode);
 
+                const canBorrow =
+                  (mode === '1'
+                    ? asset?.token?.address.toLowerCase() ===
+                      SLCToken?.address.toLowerCase()
+                    : true) && !!availableAmount;
+
                 const data = {
                   ...asset,
                   depositAmount,
@@ -192,6 +207,7 @@ const useDashboard = () => {
                   availableTotalPrice,
                   availableAmount,
                   canCollateral,
+                  canBorrow,
                 };
                 if (isNativeToken(asset.token)) {
                   const balance = await getNativeTokenBalance();

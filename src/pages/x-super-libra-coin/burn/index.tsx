@@ -106,7 +106,7 @@ function BurnSLC() {
     );
   };
   return (
-    <div className="flex flex-1 flex-col items-center justify-center pt-[40px] max-md:pt-[40px] ">
+    <div className="flex flex-1 flex-col items-center justify-center pt-[40px] max-md:px-[10px]  max-md:pt-[40px]">
       <RouteTabs
         tabs={[
           {

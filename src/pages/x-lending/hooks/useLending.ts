@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import useErc20Balance from '@/hooks/useErc20Balance.ts';
+import useErc20Balance, { formatNumber } from '@/hooks/useErc20Balance.ts';
 import { XUNION_LENDING_CONTRACT } from '@/contracts';
 import { isNumeric } from '@/utils/isNumeric.ts';
 import useXWriteContract from '@/hooks/useXWriteContract.ts';
@@ -7,7 +7,7 @@ import { Address, erc20Abi } from 'viem';
 import { useReadContract } from 'wagmi';
 import useTokenPrice from '@/hooks/useTokenPrice.ts';
 import { parseUnits } from 'ethers';
-import { LendingAsset } from '@/types/Lending.ts';
+import { EstimatedHealthFactor, LendingAsset } from '@/types/Lending.ts';
 import useHealthFactor from '@/pages/x-lending/hooks/useHealthFactor.ts';
 import useNativeToken from '@/hooks/useNativeToken.ts';
 
@@ -22,7 +22,7 @@ const useLending = ({
   const inputToken = asset.token;
   const availableAmount = asset.availableAmount;
   const [payAmount, setPayAmount] = useState<string>('');
-  const [healthFactor, setHealthFactor] = useState<string>();
+  const [healthFactor, setHealthFactor] = useState<EstimatedHealthFactor>();
   const [inputOwnerAmount, setInputOwnerAmount] = useState(0);
   const { isNativeToken } = useNativeToken();
   const { totalPrice: inputTokenTotalPrice } = useTokenPrice({
@@ -65,7 +65,9 @@ const useLending = ({
 
   const lendNormal = async () => {
     if (decimals) {
-      const amountIn = parseUnits(payAmount, decimals);
+      const amountIn = parseUnits(
+        String(formatNumber(Number(payAmount || 0), 4))
+      );
 
       const { address, abi } = XUNION_LENDING_CONTRACT.interface;
       writeContractAsync({
@@ -80,7 +82,9 @@ const useLending = ({
   const lendCFX = async () => {
     if (decimals) {
       const { address, abi } = XUNION_LENDING_CONTRACT.interface;
-      const amountIn = parseUnits(payAmount, decimals);
+      const amountIn = parseUnits(
+        String(formatNumber(Number(payAmount || 0), 4))
+      );
       writeContractAsync({
         address: address as Address,
         abi,

@@ -57,11 +57,14 @@ const PoolList = () => {
       title: t('common.tvl'),
       dataIndex: 'tvl',
       width: 240,
-      render: (value: string) => (
-        <div className="flex flex-col gap-[5px]">
-          {formatCurrency(Number(formatUnits(value || 0n)), true)}
-        </div>
-      ),
+      render: (value: string) => {
+        console.log(formatCurrency(Number(formatUnits(value || 0n)), true));
+        return (
+          <div className="flex flex-col gap-[5px]">
+            {formatCurrency(Number(formatUnits(value || 0n)), true)}
+          </div>
+        );
+      },
     },
     {
       title: t('common.volume24h'),

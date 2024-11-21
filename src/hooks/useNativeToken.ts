@@ -6,7 +6,7 @@ import { formatUnits } from 'ethers';
 import { formatNumber } from '@/hooks/useErc20Balance.ts';
 
 const useNativeToken = () => {
-  const { chainId = 71, address } = useAccount();
+  const { chainId = 1_030, address } = useAccount();
 
   const provider = useProvider();
   const getNativeTokenERC20Address = (token: Token) => {
@@ -32,7 +32,7 @@ const useNativeToken = () => {
   const getNativeTokenBalance = async () => {
     if (address) {
       const amount = await provider.getBalance(address).catch(() => 0n);
-      return Number(formatNumber(Number(formatUnits(amount, 18)), 6));
+      return Number(formatNumber(Number(formatUnits(amount, 18)), 7));
     }
     return 0;
   };

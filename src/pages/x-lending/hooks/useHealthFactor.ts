@@ -1,63 +1,52 @@
 import { useAccount } from 'wagmi';
-import { formatUnits } from 'ethers';
+import { formatUnits, parseUnits } from 'ethers';
 import useLendingContract from '@/hooks/useLendingContract.ts';
 import { LendingAsset } from '@/types/Lending.ts';
 import { formatNumber } from '@/hooks/useErc20Balance';
+import { EstimatedHealthFactor } from '@/types/Lending';
 
 const useHealthFactor = (asset: LendingAsset) => {
   const contract = useLendingContract();
 
   const { address } = useAccount();
 
-  const getDepositHealth = async (amount: string) => {
-    if (address && amount) {
+  const getEatRate = async (
+    amount: string,
+    mode: number
+  ): Promise<EstimatedHealthFactor | undefined> => {
+    if (address) {
       return contract
-        .usersHealthFactorEstimate(
+        .usersHealthFactorAndInterestEstimate(
           address,
           asset.token.address,
-          String(formatNumber(Number(amount), 6) * 10 ** 18),
-          0
+          parseUnits(String(formatNumber(Number(amount || '0'), 6))),
+          mode
         )
-        .then((factor) => formatUnits(factor, 18));
+        .then((factor) => {
+          return {
+            healthFactor: formatUnits(factor[0], 18),
+            supplyInterest:
+              formatNumber(Number(String(factor[1][0])) / 100, 2) + '%',
+            borrowInterest:
+              formatNumber(Number(String(factor[1][1])) / 100, 2) + '%',
+          };
+        });
     }
+  };
+
+  const getDepositHealth = async (amount: string) => {
+    return getEatRate(amount, 0);
   };
 
   const getWithdrawHealth = async (amount: string) => {
-    if (address && amount) {
-      return contract
-        .usersHealthFactorEstimate(
-          address,
-          asset.token.address,
-          String(formatNumber(Number(amount), 6) * 10 ** 18),
-          1
-        )
-        .then((factor) => formatUnits(factor, 18));
-    }
+    return getEatRate(amount, 1);
   };
 
   const getLendingHealth = async (amount: string) => {
-    if (address && amount) {
-      return contract
-        .usersHealthFactorEstimate(
-          address,
-          asset.token.address,
-          String(formatNumber(Number(amount), 6) * 10 ** 18),
-          2
-        )
-        .then((factor) => formatUnits(factor, 18));
-    }
+    return getEatRate(amount, 2);
   };
   const getRepayHealth = async (amount: string) => {
-    if (address && amount) {
-      return contract
-        .usersHealthFactorEstimate(
-          address,
-          asset.token.address,
-          String(formatNumber(Number(amount), 6) * 10 ** 18),
-          3
-        )
-        .then((factor) => formatUnits(factor, 18));
-    }
+    return getEatRate(amount, 3);
   };
 
   return {

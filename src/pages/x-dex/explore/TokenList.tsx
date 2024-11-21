@@ -24,7 +24,7 @@ const TokenList = () => {
   });
 
   useEffect(() => {
-    getTokens({ pageNum: 1, pageSize: 1000 });
+    getTokens({ pageNum: 1, pageSize: 100 });
   }, []);
 
   const { t } = useTranslate();

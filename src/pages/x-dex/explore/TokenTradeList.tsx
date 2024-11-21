@@ -44,7 +44,7 @@ const TokenList = () => {
 
   useEffect(() => {
     if (tokenAddress) {
-      getTradeData({ address: tokenAddress });
+      getTradeData({ address: tokenAddress, pageNum: 1, pageSize: 30 });
     }
   }, [tokenAddress]);
 

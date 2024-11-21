@@ -14,8 +14,11 @@ import usePendingNotice from '@/components/notices/usePendingNotice.tsx';
 import useWalletAuth from '@/components/Wallet/useWalletAuth';
 import { parseUnits } from 'ethers';
 import useSetDefaultToken from '@/hooks/useSetDefaultToken';
+import { useCommonStore } from '@/store/common';
 
 const useListing = () => {
+  const listingLimit = useCommonStore((state) => state.swapLimit?.[0] || 200);
+
   const tokenB = SLCToken;
   const { disabled: invalidWallet } = useWalletAuth();
   const { getBalance } = useErc20Balance();
@@ -163,7 +166,7 @@ const useListing = () => {
     if (!tokenAAmount || Number(tokenAAmount) < 0.0000001) {
       return true;
     }
-    if (!tokenBAmount || Number(tokenBAmount) < 1000) {
+    if (!tokenBAmount || Number(tokenBAmount) < listingLimit) {
       return true;
     }
     return invalidWallet || !tokenA?.address || !!lpPairAddress;

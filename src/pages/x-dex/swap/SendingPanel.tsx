@@ -3,10 +3,8 @@ import WithAuthButton from '@/components/Wallet/WithAuthButton.tsx';
 import { Button, Form } from 'antd';
 import SecondTabs from '@/pages/x-dex/swap/SecondTabs.tsx';
 import AddressInput from '@/components/AddressInput.tsx';
-import { Address, isAddress } from 'viem';
+import { isAddress } from 'viem';
 import useSendToken from '@/pages/x-dex/hooks/useSendToken.ts';
-import useApprove from '@/pages/x-dex/hooks/useApprove.ts';
-import { XUNION_SWAP_CONTRACT } from '@/contracts';
 import { useTranslate } from '@/i18n';
 
 const SendingPanel = ({
@@ -30,19 +28,12 @@ const SendingPanel = ({
     isSubmittedLoading,
   } = useSendToken();
   const { t } = useTranslate();
-  const { isApproved, loading, approve } = useApprove({
-    token: inputToken!,
-    amount: payAmount,
-    spenderAddress: XUNION_SWAP_CONTRACT.interface.address as Address,
-  });
 
   const renderSwapText = () => {
     if (isInsufficient) {
       return t('common.error.insufficient', { name: `${inputToken?.symbol}` });
     }
-    if (!isApproved && inputToken?.symbol) {
-      return t('common.approve.to', { name: `${inputToken?.symbol}` });
-    }
+
     return t('x-dex.send.title');
   };
   return (
@@ -106,15 +97,11 @@ const SendingPanel = ({
             className="w-full"
             type="primary"
             size="large"
-            loading={loading || isSubmittedLoading}
+            loading={isSubmittedLoading}
             disabled={!(isAddress(cis) || !!cisAddress) || isInsufficient}
             onClick={() => {
               form.validateFields().then(() => {
-                if (!isApproved) {
-                  approve();
-                } else {
-                  confirm();
-                }
+                confirm();
               });
             }}
           >

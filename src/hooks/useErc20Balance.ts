@@ -13,7 +13,7 @@ const useErc20Balance = () => {
   const { address: account } = useAccount();
   const provider = useProvider();
   const { isNativeToken } = useNativeToken();
-  const getBalance = async (address: string, fixed = 4) => {
+  const getBalance = async (address: string, fixed = 7) => {
     if (!account) return 0;
     try {
       if (isNativeToken({ address })) {

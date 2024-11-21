@@ -3,7 +3,7 @@ import { usePersistStore } from '@/store/persist.ts';
 import { BUTTON_ACCESS } from '@/types/auth.ts';
 import { useMemo } from 'react';
 
-export const CHAIN_ID = 71; //eSpace testnet  71/ mian 1_030
+export const CHAIN_ID = 1_030; //eSpace testnet  71/ main 1_030
 
 const useWalletAuth = (
   access: BUTTON_ACCESS[] = [BUTTON_ACCESS.CONNECTED, BUTTON_ACCESS.CHAIN]

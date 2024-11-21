@@ -21,6 +21,7 @@ export interface LendingAsset {
   availableAmount?: number;
   availableTotalPrice?: number;
   canCollateral?: boolean;
+  canBorrow?: boolean;
   oraclePrice?: number;
   unitPrice?: number;
 }
@@ -30,4 +31,10 @@ export interface LendingAssetInterest {
   deposit_interest: string;
   loan_interest: string;
   token: Token;
+}
+
+export interface EstimatedHealthFactor {
+  healthFactor: string;
+  borrowInterest: string;
+  supplyInterest: string;
 }

@@ -1,7 +1,7 @@
 import MagicCard from '@/components/MagicCard';
 import { useTranslate } from '@/i18n';
 import { Recently } from '@/types/explore';
-import { formatLargeNumber } from '@/utils';
+import { formatCurrency } from '@/utils';
 import { Select, Skeleton } from 'antd';
 import { formatUnits } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
@@ -12,7 +12,6 @@ import VolumeBar from './charts/VolumeBar';
 import TVLLinear from './charts/TVLLinear';
 import PriceArea from './charts/PriceArea';
 import useTokenPrice from '@/hooks/useTokenPrice';
-import { formatNumber } from '@/hooks/useErc20Balance';
 
 const TypeSelector = ({
   onChange,
@@ -93,9 +92,10 @@ const VOL = ({
 
   const total = useMemo(() => {
     if (vols?.items.length) {
-      return formatLargeNumber(
+      return formatCurrency(
         Number(formatUnits(vols?.items[vols?.items.length - 1]?.amount || 0n)),
-        4
+        false,
+        0
       );
     }
     return 0;
@@ -159,9 +159,10 @@ const TVL = ({
 
   const total = useMemo(() => {
     if (tvls?.items.length) {
-      return formatLargeNumber(
+      return formatCurrency(
         Number(formatUnits(tvls?.items[tvls?.items.length - 1]?.amount || 0n)),
-        4
+        false,
+        0
       );
     }
     return 0;
@@ -225,7 +226,7 @@ const Price = ({
   }, [recently]);
 
   const total = useMemo(() => {
-    return formatNumber(totalPrice || 0, 4);
+    return formatCurrency(totalPrice || 0, false, 0);
   }, [totalPrice]);
 
   return (

@@ -1,6 +1,6 @@
 import { AnyObject } from 'antd/es/_util/type';
 import { ColumnType } from 'antd/es/table';
-import { Table } from 'antd';
+import { Table, TableProps } from 'antd';
 import { useAccount } from 'wagmi';
 import { ReactNode, useMemo } from 'react';
 import { cn } from '@/utils/classnames.ts';
@@ -11,12 +11,13 @@ function ResponsiveTable<T extends AnyObject>({
   columns,
   rowKey,
   size,
+  ...rest
 }: {
   dataSource: T[];
   columns: ColumnType<T>[];
   rowKey: string;
   size?: SizeType;
-}) {
+} & TableProps) {
   const { address } = useAccount();
 
   const cols = useMemo(
@@ -35,6 +36,7 @@ function ResponsiveTable<T extends AnyObject>({
           pagination={false}
           rowKey={rowKey}
           size={size}
+          {...rest}
         />
       </div>
       <div className="md:hidden">

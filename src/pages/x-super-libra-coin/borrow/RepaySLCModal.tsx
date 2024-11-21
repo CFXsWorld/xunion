@@ -76,7 +76,7 @@ const RepaySLCModal = ({
           loading={isTokenAApproving}
           onClick={approveTokenA}
         >
-          {t('x-dex.swap.give.permission', { name: 'SLC' })}
+          {t('x-dex.swap.give.permission', { name: 'xUSD' })}
         </Button>
       );
     }
@@ -89,7 +89,7 @@ const RepaySLCModal = ({
         onClick={onConfirm}
         loading={isSubmittedLoading || loading}
       >
-        {t('x-lending.repay.to', { name: 'SLC' })}
+        {t('x-lending.repay.to', { name: 'xUSD' })}
       </Button>
     );
   };
@@ -97,7 +97,7 @@ const RepaySLCModal = ({
     <Modal
       open={open}
       onCancel={onClose}
-      title={t('x-lending.repay.to', { name: 'SLC' })}
+      title={t('x-lending.repay.to', { name: 'xUSD' })}
       footer={null}
       centered
       maskClosable={false}
@@ -167,7 +167,7 @@ const RepaySLCModal = ({
               {t('x-lending.repay.remaining.debt')}
             </span>
             <div className="flex-center flex gap-[10px]">
-              <span>{formatCurrency(availableAmount, false)} SLC</span>
+              <span>{formatCurrency(availableAmount, false)} xUSD</span>
               <span>{`->`}</span>
               <span>
                 {formatCurrency(
@@ -175,7 +175,7 @@ const RepaySLCModal = ({
                     Number(isNumeric(payAmount) ? payAmount : 0),
                   false
                 )}{' '}
-                SLC
+                xUSD
               </span>
             </div>
           </div>

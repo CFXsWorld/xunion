@@ -1,24 +1,12 @@
 import { Token } from '@/types/swap.ts';
-const presets = [
-  {
-    label: '1000',
-    value: '1000',
-  },
-  {
-    label: '2000',
-    value: '2000',
-  },
-  {
-    label: '3000',
-    value: '3000',
-  },
-];
+
 import { cn } from '@/utils/classnames.ts';
 import { ChangeEvent } from 'react';
 import { useTranslate } from '@/i18n';
 import { Skeleton } from 'antd';
 import { TokenIcon } from './icons';
 import { SLCToken } from '@/contracts';
+import { useCommonStore } from '@/store/common';
 
 const SLCTokenInput = ({
   title,
@@ -48,6 +36,21 @@ const SLCTokenInput = ({
   min?: number;
 }) => {
   const { t } = useTranslate();
+  const listingLimit = useCommonStore((state) => state.swapLimit?.[0] || 200);
+  const presets = [
+    {
+      label: `${listingLimit}`,
+      value: `${listingLimit}`,
+    },
+    {
+      label: '1000',
+      value: '1000',
+    },
+    {
+      label: '3000',
+      value: '3000',
+    },
+  ];
   const label = amountLabel || t('x-dex.swap.token.balance');
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     let value = event.target.value;

@@ -2,7 +2,8 @@ import { notification } from 'antd';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons';
 import { useTranslate } from '@/i18n';
 
-export const confluxScan = 'https://evmtestnet.confluxscan.io/';
+// export const confluxScan = 'https://evmtestnet.confluxscan.io/';
+export const confluxScan = 'https://evm.confluxscan.io/';
 
 const usePendingNotice = () => {
   const { t } = useTranslate();

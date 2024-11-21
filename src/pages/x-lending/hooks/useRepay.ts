@@ -7,9 +7,10 @@ import { Address, erc20Abi } from 'viem';
 import { useReadContract } from 'wagmi';
 import useTokenPrice from '@/hooks/useTokenPrice.ts';
 import { parseUnits } from 'ethers';
-import { LendingAsset } from '@/types/Lending.ts';
+import { EstimatedHealthFactor, LendingAsset } from '@/types/Lending.ts';
 import useHealthFactor from '@/pages/x-lending/hooks/useHealthFactor.ts';
 import useNativeToken from '@/hooks/useNativeToken.ts';
+import { formatNumber } from '@/utils';
 
 const useRepay = ({
   asset,
@@ -22,7 +23,7 @@ const useRepay = ({
   const availableAmount = asset.lendingAmount;
   const inputToken = asset.token;
   const [payAmount, setPayAmount] = useState<string>('');
-  const [healthFactor, setHealthFactor] = useState<string>();
+  const [healthFactor, setHealthFactor] = useState<EstimatedHealthFactor>();
   const [inputOwnerAmount, setInputOwnerAmount] = useState(0);
   const { isNativeToken } = useNativeToken();
   const [isRepayAll, setRepayAll] = useState(false);
@@ -97,6 +98,10 @@ const useRepay = ({
           abi,
           functionName: 'repayLoanMax2',
           args: [inputToken?.address],
+          value: parseUnits(
+            String(formatNumber(Number(availableAmount) * 1.001, 4)),
+            decimals
+          ),
         });
       } else {
         writeContractAsync({
@@ -120,6 +125,7 @@ const useRepay = ({
 
   const onRepayAllChange = async (checked: boolean) => {
     setRepayAll(checked);
+    console.log(availableAmount, 'availableAmount');
     if (checked) {
       setPayAmount(String(availableAmount));
     } else {

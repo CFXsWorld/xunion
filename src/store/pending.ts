@@ -12,6 +12,7 @@ interface Pending {
 interface Submitted {
   hash: string;
   title?: string;
+  forceReload?: boolean;
 }
 export interface TxPendingState {
   pendingTransactions: Pending[];

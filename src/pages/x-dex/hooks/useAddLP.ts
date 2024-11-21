@@ -6,7 +6,7 @@ import { formatEther, getAddress } from 'ethers';
 import { isNumeric } from '@/utils/isNumeric.ts';
 import { isSLCToken, XUNION_SWAP_CONTRACT } from '@/contracts';
 import useNativeToken from '@/hooks/useNativeToken.ts';
-import useSetDefaultToken from '@/hooks/useSetDefaultToken';
+import useSetDefaultTokens from '@/hooks/useSetDefaultTokens';
 
 type Step = 'FILL' | 'CONFIRM';
 
@@ -257,9 +257,15 @@ const useAddLP = (): LiquidityReturnType => {
     [tokenBAmount, tokenAAmount, tokenA?.address]
   );
 
-  useSetDefaultToken('tokena', onTokenAChange);
-
-  useSetDefaultToken('tokenb', onTokenBChange);
+  useSetDefaultTokens(['tokena', 'tokenb'], async ([tokenA, tokenB]) => {
+    setTokenA(tokenA);
+    setTokenB(tokenB);
+    const res = await getLpTotal({
+      tokenA,
+      tokenB,
+    });
+    setLpPairInfo(res);
+  });
 
   const onTokenAAmountChange = useCallback(
     (value: string) => {
@@ -296,7 +302,7 @@ const useAddLP = (): LiquidityReturnType => {
         return true;
       } else {
         if (lpPairInfo?.isInitialPool && SLCUnitPrice && tokenA?.address) {
-          return tokenATotalPrice >= 1000 * SLCUnitPrice;
+          return tokenATotalPrice >= 100 * SLCUnitPrice;
         }
       }
     }
@@ -309,7 +315,7 @@ const useAddLP = (): LiquidityReturnType => {
         return true;
       } else {
         if (lpPairInfo?.isInitialPool && SLCUnitPrice) {
-          return tokenBTotalPrice >= 1000 * SLCUnitPrice;
+          return tokenBTotalPrice >= 100 * SLCUnitPrice;
         }
       }
     }

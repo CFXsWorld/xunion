@@ -12,10 +12,10 @@ const SecondTabs = ({
 
   const tabs = [
     { name: t('x-dex.swap.title'), value: 'swap' },
-    {
-      name: t('x-dex.limit.title'),
-      value: 'limit',
-    },
+    // {
+    //   name: t('x-dex.limit.title'),
+    //   value: 'limit',
+    // },
     {
       name: t('x-dex.send.title'),
       value: 'send',

@@ -1,7 +1,7 @@
 import MagicCard from '@/components/MagicCard';
 import { useTranslate } from '@/i18n';
 import { Recently } from '@/types/explore';
-import { formatLargeNumber } from '@/utils';
+import { formatCurrency } from '@/utils';
 import { Select, Skeleton } from 'antd';
 import { formatUnits } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
@@ -86,9 +86,10 @@ const VOL = ({
 
   const total = useMemo(() => {
     if (vols?.items.length) {
-      return formatLargeNumber(
+      return formatCurrency(
         Number(formatUnits(vols?.items[vols?.items.length - 1]?.amount || 0n)),
-        4
+        false,
+        0
       );
     }
     return 0;
@@ -152,9 +153,10 @@ const TVL = ({
 
   const total = useMemo(() => {
     if (tvls?.items.length) {
-      return formatLargeNumber(
+      return formatCurrency(
         Number(formatUnits(tvls?.items[tvls?.items.length - 1]?.amount || 0n)),
-        4
+        false,
+        0
       );
     }
     return 0;

@@ -13,6 +13,11 @@
       },
       {
         "internalType": "address",
+        "name": "_lCoreAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
         "name": "_oracleAddr",
         "type": "address"
       }
@@ -26,325 +31,12 @@
   },
   {
     "inputs": [],
-    "name": "ONE_YEAR",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "UPPER_SYSTEM_LIMIT",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "assetsBaseInfo",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "maximumLTV",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "liquidationPenalty",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "maxLendingAmountInRIM",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "bestLendingRatio",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "lendingModeNum",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "homogeneousModeLTV",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "bestDepositInterestRate",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "assetsDeposit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "assetsDeposit2",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "assetsDepositAndLendAddrs",
-    "outputs": [
-      {
-        "internalType": "address[2]",
-        "name": "depositAndLend",
-        "type": "address[2]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "assetsDepositAndLendAmount",
-    "outputs": [
-      {
-        "internalType": "uint256[2]",
-        "name": "depositAndLendAmount",
-        "type": "uint256[2]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "assetsLiqPenaltyInfo",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "liqPenalty",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "num",
-        "type": "uint256"
-      }
-    ],
-    "name": "assetsSerialNumber",
+    "name": "lCoreAddr",
     "outputs": [
       {
         "internalType": "address",
         "name": "",
         "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "assetsTimeDependentParameter",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "latestDepositCoinValue",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "latestLendingCoinValue",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "latestDepositInterest",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "latestLendingInterest",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "generalParametersOfAllAssets",
-    "outputs": [
-      {
-        "internalType": "address[]",
-        "name": "tokens",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "totalSupplied",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "totalBorrowed",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "supplyApy",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "borrowApy",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "assetsPrice",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint8[]",
-        "name": "tokenMode",
-        "type": "uint8[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "homogeneousFloorOfHealthFactor",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "lendAsset",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "lendAsset2",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lendAvailableAmount",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "availableAmount",
-        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
@@ -365,17 +57,12 @@
   },
   {
     "inputs": [],
-    "name": "licensedAssetOverview",
+    "name": "oracleAddr",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "totalValueOfMortgagedAssets",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "totalValueOfLendedAssets",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -383,16 +70,20 @@
   },
   {
     "inputs": [],
-    "name": "licensedAssetPrice",
+    "name": "wcfx",
     "outputs": [
       {
-        "internalType": "uint256[]",
-        "name": "assetPrice",
-        "type": "uint256[]"
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
   },
   {
     "inputs": [
@@ -456,6 +147,190 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "viewUsersHealthFactor",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "userHealthFactor",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "assetsDepositAndLendAddrs",
+    "outputs": [
+      {
+        "internalType": "address[2]",
+        "name": "depositAndLend",
+        "type": "address[2]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "assetsDepositAndLendAmount",
+    "outputs": [
+      {
+        "internalType": "uint256[2]",
+        "name": "depositAndLendAmount",
+        "type": "uint256[2]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lendAvailableAmount",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "availableAmount",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "assetsBaseInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "maximumLTV",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidationPenalty",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "maxLendingAmountInRIM",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "bestLendingRatio",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "lendingModeNum",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "homogeneousModeLTV",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "bestDepositInterestRate",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "assetsTimeDependentParameter",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "latestDepositCoinValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "latestLendingCoinValue",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "latestDepositInterest",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "latestLendingInterest",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "licensedAssetPrice",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "assetPrice",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "licensedAssetOverview",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalValueOfMortgagedAssets",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalValueOfLendedAssets",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "licensedRIMassetsInfo",
     "outputs": [
@@ -479,12 +354,23 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "nomalFloorOfHealthFactor",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "userDepositAndLendingValue",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "_amountDeposit",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amountLending",
         "type": "uint256"
       }
     ],
@@ -492,94 +378,29 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "oracleAddr",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "userAssetOverview",
     "outputs": [
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
+        "internalType": "address[]",
+        "name": "tokens",
+        "type": "address[]"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "repayLoan",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
+        "internalType": "uint256[]",
+        "name": "_amountDeposit",
+        "type": "uint256[]"
       },
       {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "repayLoan2",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      }
-    ],
-    "name": "repayLoanMax",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "tokenAddr",
-        "type": "address"
-      }
-    ],
-    "name": "repayLoanMax2",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "riskIsolationModeLendingNetAmount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "uint256[]",
+        "name": "_amountLending",
+        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",
@@ -635,24 +456,34 @@
         "internalType": "address",
         "name": "user",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "operator",
+        "type": "uint256"
       }
     ],
-    "name": "userAssetOverview",
+    "name": "usersHealthFactorAndInterestEstimate",
     "outputs": [
       {
-        "internalType": "address[]",
-        "name": "tokens",
-        "type": "address[]"
+        "internalType": "uint256",
+        "name": "userHealthFactor",
+        "type": "uint256"
       },
       {
-        "internalType": "uint256[]",
-        "name": "_amountDeposit",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_amountLending",
-        "type": "uint256[]"
+        "internalType": "uint256[2]",
+        "name": "newInterest",
+        "type": "uint256[2]"
       }
     ],
     "stateMutability": "view",
@@ -666,17 +497,31 @@
         "type": "address"
       }
     ],
-    "name": "userDepositAndLendingValue",
+    "name": "viewUserLendableLimit",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "_amountDeposit",
+        "name": "userLendableLimit",
         "type": "uint256"
-      },
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "uint256",
-        "name": "_amountLending",
+        "name": "num",
         "type": "uint256"
+      }
+    ],
+    "name": "assetsSerialNumber",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -707,42 +552,52 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "ONE_YEAR",
+    "outputs": [
       {
-        "internalType": "uint8",
-        "name": "_mode",
-        "type": "uint8"
-      },
-      {
-        "internalType": "address",
-        "name": "_userRIMAssetsAddress",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
-    "name": "userModeSetting",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "userProfile",
+    "inputs": [],
+    "name": "UPPER_SYSTEM_LIMIT",
     "outputs": [
       {
-        "internalType": "int256",
-        "name": "netWorth",
-        "type": "int256"
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nomalFloorOfHealthFactor",
+    "outputs": [
       {
-        "internalType": "int256",
-        "name": "netApy",
-        "type": "int256"
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "homogeneousFloorOfHealthFactor",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -776,30 +631,15 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "token",
         "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "operator",
-        "type": "uint256"
       }
     ],
-    "name": "usersHealthFactorEstimate",
+    "name": "riskIsolationModeLendingNetAmount",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "userHealthFactor",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -843,12 +683,60 @@
         "type": "address"
       }
     ],
-    "name": "viewUserLendableLimit",
+    "name": "userProfile",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "userLendableLimit",
-        "type": "uint256"
+        "internalType": "int256",
+        "name": "netWorth",
+        "type": "int256"
+      },
+      {
+        "internalType": "int256",
+        "name": "netApy",
+        "type": "int256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "generalParametersOfAllAssets",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "tokens",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "totalSupplied",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "totalBorrowed",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "supplyApy",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "borrowApy",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "assetsPrice",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint8[]",
+        "name": "tokenMode",
+        "type": "uint8[]"
       }
     ],
     "stateMutability": "view",
@@ -857,33 +745,37 @@
   {
     "inputs": [
       {
+        "internalType": "uint8",
+        "name": "_mode",
+        "type": "uint8"
+      },
+      {
         "internalType": "address",
-        "name": "user",
+        "name": "_userRIMAssetsAddress",
         "type": "address"
       }
     ],
-    "name": "viewUsersHealthFactor",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "userHealthFactor",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "userModeSetting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "wcfx",
-    "outputs": [
+    "inputs": [
       {
         "internalType": "address",
-        "name": "",
+        "name": "tokenAddr",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "name": "assetsDeposit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -902,6 +794,86 @@
     "name": "withdrawDeposit",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      }
+    ],
+    "name": "withdrawDepositMax",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "lendAsset",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "repayLoan",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      }
+    ],
+    "name": "repayLoanMax",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "assetsDeposit2",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -930,7 +902,7 @@
         "type": "address"
       }
     ],
-    "name": "withdrawDepositMax",
+    "name": "withdrawDepositMax2",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -941,15 +913,47 @@
         "internalType": "address",
         "name": "tokenAddr",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       }
     ],
-    "name": "withdrawDepositMax2",
+    "name": "lendAsset2",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "repayLoan2",
+    "outputs": [],
     "stateMutability": "payable",
-    "type": "receive"
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "tokenAddr",
+        "type": "address"
+      }
+    ],
+    "name": "repayLoanMax2",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
   }
 ]

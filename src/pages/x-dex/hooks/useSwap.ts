@@ -56,7 +56,7 @@ const useSwap = ({
 }): SwapReturnType => {
   const { getBalance } = useErc20Balance();
   const { isNativeToken, getNativeTokenBalance } = useNativeToken();
-  const [slippage, setSlippage] = useState('-1');
+  const [slippage, setSlippage] = useState('1');
   const [inputToken, setInputToken] = useState<Token | undefined>();
   const [outputToken, setOutputToken] = useState<Token | undefined>();
   const [payAmount, setPayAmount] = useState<string>('');
@@ -113,7 +113,7 @@ const useSwap = ({
   useEffect(() => {
     if (fromWithSLCPairAddress && payAmount) {
       getLpPrice(fromWithSLCPairAddress).then((unitPrice) => {
-        setInputTokenTotalPrice(formatNumber(Number(payAmount) * unitPrice, 2));
+        setInputTokenTotalPrice(formatNumber(Number(payAmount) * unitPrice, 4));
       });
     }
   }, [fromWithSLCPairAddress, payAmount]);
@@ -122,7 +122,7 @@ const useSwap = ({
     if (toWithSLCPairAddress && receiveAmount) {
       getLpPrice(toWithSLCPairAddress).then((unitPrice) => {
         setOutputTokenTotalPrice(
-          formatNumber(Number(receiveAmount) * unitPrice, 2)
+          formatNumber(Number(receiveAmount) * unitPrice, 4)
         );
       });
     }
@@ -141,7 +141,7 @@ const useSwap = ({
 
   const feeAmount = useMemo(() => {
     if (fee && outputTokenTotalPrice) {
-      return formatNumber(Number(outputTokenTotalPrice || 0) * (fee / 100), 6);
+      return formatNumber(Number(outputTokenTotalPrice || 0) * (fee / 100), 7);
     }
     return 0;
   }, [fee, outputTokenTotalPrice]);
@@ -151,14 +151,14 @@ const useSwap = ({
       const slippedAmount =
         (Number(slippage === '-1' ? '0.5' : slippage) / 100) *
         Number(receiveAmount);
-      return formatNumber(Number(receiveAmount || 0) - slippedAmount, 6);
+      return formatNumber(Number(receiveAmount || 0) - slippedAmount, 7);
     }
 
     return 0;
   }, [receiveAmount, slippage]);
   const estReceived = useMemo(() => {
     if (isNumeric(receiveAmount)) {
-      return formatNumber(Number(receiveAmount || 0), 6);
+      return formatNumber(Number(receiveAmount || 0), 7);
     }
 
     return 0;

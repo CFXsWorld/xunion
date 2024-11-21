@@ -6,7 +6,7 @@ import { useTranslate } from '@/i18n';
 import { Recently, TokenTVL } from '@/types/explore';
 import { useEffect, useMemo, useState } from 'react';
 import { formatUnits } from 'ethers';
-import { formatLargeNumber } from '@/utils';
+import { formatCurrency } from '@/utils';
 
 const SwapTVL = ({
   data,
@@ -23,9 +23,10 @@ const SwapTVL = ({
 
   const total = useMemo(() => {
     if (data?.length) {
-      return formatLargeNumber(
+      return formatCurrency(
         Number(formatUnits(data[data.length - 1]?.amount || 0n)),
-        4
+        false,
+        0
       );
     }
     return 0;

@@ -48,7 +48,7 @@ const Borrows = ({
       render: (_: string, record: LendingAsset) => {
         return (
           <div className="flex flex-col gap-[5px]">
-            <span>{`≈ ${record.lendingInterest}%`}</span>
+            <span>{`≈ -${record.lendingInterest}%`}</span>
           </div>
         );
       },
@@ -63,7 +63,7 @@ const Borrows = ({
               type="primary"
               className="rounded-[8px] text-[12px] max-md:h-[32px] max-md:flex-1 max-md:rounded-[16px]"
               size="small"
-              disabled={!record.availableAmount}
+              disabled={!record.canBorrow}
               onClick={() => {
                 setLendingItem(record);
               }}

@@ -30,6 +30,7 @@ const useMulticall = () => {
       ]);
     }
     return await multicallContract.aggregate.staticCall(promises);
+    // return await multicallContract.tryAggregate.staticCall(true, promises);
   };
   return { multiCall };
 };
